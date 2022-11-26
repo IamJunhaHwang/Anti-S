@@ -7,6 +7,7 @@ TBD
 ### 의존성
 
 - python 3.x
+- Andriod & API Level: `Andriod 11.0`, `30`
 - TBD
 
 ### 사용 방법
