@@ -7,22 +7,39 @@
     android:layout_height="match_parent"
     >
 
-    <Button
-        android:id="@+id/onoffswitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="onoff_switch"
-        />
-    <Button
-        android:id="@+id/info_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="info_report"
-        />
-    <Button
-        android:id="@+id/log_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="log_setting"
-        />
+    <FrameLayout
+    android:id="@+id/tabContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            >
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="on/off"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="report/info"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="log"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="setting"
+                />
+        </com.google.android.material.tabs.TabLayout>
+    </FrameLayout>
+
 </LinearLayout>
