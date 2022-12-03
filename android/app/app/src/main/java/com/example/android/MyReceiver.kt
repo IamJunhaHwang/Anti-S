@@ -1,16 +1,17 @@
 package com.example.android
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.SmsMessage;
-import android.util.Log;
-import java.util.Date;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.telephony.SmsMessage
+import android.util.Log
 
 class MyReceiver : BroadcastReceiver() {
+    private val TAG = "SMSReceiver"
 
     override fun onReceive(context: Context, intent: Intent) {
+        Log.d(TAG, "onReceive() called")
         if(intent?.action.equals("android.provider.Telephony.SMS_RECEIVED")){
             val bundle = intent?.extras
             val messages = smsMessageParse(bundle!!)
@@ -23,9 +24,9 @@ class MyReceiver : BroadcastReceiver() {
     }
 
     fun smsMessageParse(bundle: Bundle): Array<SmsMessage?>? {
-        val objs = bundle["pdus"] as Array<Any>?
+        val objs = bundle["pdus"] as Array<*>?
         val messages: Array<SmsMessage?> = arrayOfNulls<SmsMessage>(objs!!.size)
-        for (i in objs!!.indices) {
+        for (i in objs.indices) {
             messages[i] = SmsMessage.createFromPdu(objs[i] as ByteArray)
         }
         return messages
