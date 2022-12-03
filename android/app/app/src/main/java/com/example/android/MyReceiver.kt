@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
+import java.util.Date
+
 
 class MyReceiver : BroadcastReceiver() {
     private val TAG = "SMSReceiver"
@@ -18,7 +20,12 @@ class MyReceiver : BroadcastReceiver() {
 
             if(messages?.size!! > 0){
                 val content = messages[0]?.messageBody.toString()
-                Log.d("인증번호 추출 ", content)
+                val date = Date(messages[0]!!.timestampMillis).toString()
+                val sender = messages[0]?.displayOriginatingAddress.toString()
+
+                Log.d("문자 내용", content)
+                Log.d("송신자 번호", sender)
+                Log.d("수신 시간", date)
             }
         }
     }
