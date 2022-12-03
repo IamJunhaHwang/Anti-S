@@ -2,13 +2,21 @@
 
 ### 설치 방법
 
-TBD
+- 어플 설치 방법
+  - TBD
+
+- 파이썬 라이브러리 설치 방법
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ### 의존성
 
 - python 3.x
-- Andriod & API Level: `Andriod 11.0`, `30`
-- TBD
+- Andriod & API Level
+  - Andriod version: `Andriod 11.0`
+  - min sdk: `16`
+  - target sdk:`32`
 
 ### 사용 방법
 
