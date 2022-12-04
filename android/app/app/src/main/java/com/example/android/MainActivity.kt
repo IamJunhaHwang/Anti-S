@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragment2: Fragment2
     private lateinit var fragment3: Fragment3
     private lateinit var fragment4: Fragment4
-    var myReceiver: MyReceiver = MyReceiver()
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -55,12 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
-
-        val intentFilter = IntentFilter()
-        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
-        registerReceiver(myReceiver, intentFilter)
-        Log.d("onCreate()", "브로드캐스트리시버 등록됨")
-
 
     }
 

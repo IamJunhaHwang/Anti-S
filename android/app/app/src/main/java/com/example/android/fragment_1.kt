@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_1.*
 
 class Fragment1 : Fragment() {
 
-    var mainActivity: MainActivity = MainActivity()
+    var myReceiver: MyReceiver = MyReceiver()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +39,20 @@ class Fragment1 : Fragment() {
 
         val intentFilter = IntentFilter()
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
+        requireActivity().registerReceiver(myReceiver, intentFilter)
+        Log.d("onCreate()", "브로드캐스트리시버 등록됨")
 
         switchView.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 statusText.text="방해금지모드 ON"
                 Log.d("모드", "방해금지모드 ON")
-                mainActivity.unregisterReceiver(mainActivity.myReceiver)
+                requireActivity().unregisterReceiver(myReceiver)
                 Log.d("onDestory()", "브로드캐스트리시버 해제됨")
             }
             else{
                 statusText.text="방해금지모드 OFF"
                 Log.d("모드", "방해금지모드 OFF")
-                requireActivity().registerReceiver(mainActivity.myReceiver, intentFilter)
+                requireActivity().registerReceiver(myReceiver, intentFilter)
                 Log.d("onCreate()", "브로드캐스트리시버 등록됨")
             }
         }
