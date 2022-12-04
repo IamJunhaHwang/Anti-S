@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
+
 
 class Fragment1 : Fragment() {
 
@@ -18,6 +20,7 @@ class Fragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
 
         return inflater.inflate(R.layout.fragment_1, container, false)
     }
