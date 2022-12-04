@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_1.*
 
 class Fragment1 : Fragment() {
 
-    var myReceiver: MyReceiver = MyReceiver()
     var mainActivity: MainActivity = MainActivity()
 
     override fun onCreateView(
@@ -45,13 +44,13 @@ class Fragment1 : Fragment() {
             if(isChecked){
                 statusText.text="방해금지모드 ON"
                 Log.d("모드", "방해금지모드 ON")
-                mainActivity.unregisterReceiver(myReceiver)
+                mainActivity.unregisterReceiver(mainActivity.myReceiver)
                 Log.d("onDestory()", "브로드캐스트리시버 해제됨")
             }
             else{
                 statusText.text="방해금지모드 OFF"
                 Log.d("모드", "방해금지모드 OFF")
-                mainActivity.registerReceiver(myReceiver, intentFilter)
+                requireActivity().registerReceiver(mainActivity.myReceiver, intentFilter)
                 Log.d("onCreate()", "브로드캐스트리시버 등록됨")
             }
         }
