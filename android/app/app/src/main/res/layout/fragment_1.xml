@@ -10,22 +10,21 @@
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/switchtext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Switch 버튼"
+        android:text="방해금지모드"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/onoffswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:switchMinWidth="60dp"
         android:switchPadding="20dp"
-        android:text="방해금지모드"/>
-
+        android:text="ON/OFF"/>
 
 
 </LinearLayout>

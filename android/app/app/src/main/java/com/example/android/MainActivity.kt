@@ -52,16 +52,6 @@ class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
-        switch1.setOnCheckedChangeListener { buttonView, isChecked ->  
-            if(isChecked){
-                textView1.text="방해금지모드"
-                Log.d("모드", "방해금지모드 ON")
-            }
-            else{
-                textView1.text="방해금지모드 미사용"
-                Log.d("모드", "방해금지모드 OFF")
-            }
-        }
 
     }
 
