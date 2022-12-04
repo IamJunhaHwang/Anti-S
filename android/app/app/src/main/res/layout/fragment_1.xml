@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment1"
-    tools:ignore="UseSwitchCompatOrMaterialXml">
+    tools:context=".Fragment1">
 
     <TextView
         android:id="@+id/switchtext"
@@ -17,7 +16,7 @@
         android:text="방해금지모드"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/onoffswitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +24,5 @@
         android:switchMinWidth="60dp"
         android:switchPadding="20dp"
         android:text="ON/OFF"/>
-
 
 </LinearLayout>
