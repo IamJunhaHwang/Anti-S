@@ -2,15 +2,15 @@ package com.example.android
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_1.*
-import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragment2: Fragment2
     private lateinit var fragment3: Fragment3
     private lateinit var fragment4: Fragment4
+    var myReceiver: MyReceiver = MyReceiver()
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
+
+        registerReceiver(myReceiver, intentFilter)
+        Log.d("onCreate()", "브로드캐스트리시버 등록됨")
 
     }
 
@@ -80,4 +85,9 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
+    /*override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(myReceiver)
+        Log.d("onDestory()", "브로드캐스트리시버 해제됨")
+    }*/
 }
