@@ -11,6 +11,7 @@ import android.view.KeyEvent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -54,12 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
-
-        val intentFilter = IntentFilter()
-        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
-
-        registerReceiver(myReceiver, intentFilter)
-        Log.d("onCreate()", "브로드캐스트리시버 등록됨")
 
     }
 

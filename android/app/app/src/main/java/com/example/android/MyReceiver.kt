@@ -14,6 +14,7 @@ class MyReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called")
+
         if(intent?.action.equals("android.provider.Telephony.SMS_RECEIVED")){
             val bundle = intent?.extras
             val messages = smsMessageParse(bundle!!)
