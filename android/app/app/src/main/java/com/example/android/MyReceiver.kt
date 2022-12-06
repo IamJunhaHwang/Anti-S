@@ -32,15 +32,6 @@ class MyReceiver : BroadcastReceiver() {
         }
     }
 
-    fun smsMessageParse(bundle: Bundle): Array<SmsMessage?>? {
-        val objs = bundle["pdus"] as Array<*>?
-        val messages: Array<SmsMessage?> = arrayOfNulls<SmsMessage>(objs!!.size)
-        for (i in objs.indices) {
-            messages[i] = SmsMessage.createFromPdu(objs[i] as ByteArray)
-        }
-        return messages
-    }
-
     private fun parseSmsMessage(bundle: Bundle): Array<SmsMessage?>? {
         val objs = bundle["pdus"] as Array<*>?
         val messages = arrayOfNulls<SmsMessage>(objs!!.size)
