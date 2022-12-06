@@ -18,7 +18,7 @@ class MyReceiver : BroadcastReceiver() {
 
         if(intent?.action.equals("android.provider.Telephony.SMS_RECEIVED")){
             val bundle = intent?.extras
-            val messages = smsMessageParse(bundle!!)
+            val messages = parseSmsMessage(bundle!!)
 
             if(messages?.size!! > 0){
                 val content = messages[0]?.messageBody.toString()
@@ -52,7 +52,6 @@ class MyReceiver : BroadcastReceiver() {
                 messages[i] = SmsMessage.createFromPdu(objs[i] as ByteArray)
             }
         }
-
         return messages
     }
 }
