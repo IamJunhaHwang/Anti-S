@@ -71,7 +71,23 @@ class klue_Dataset(torch.utils.data.Dataset):
     def __len__(self):  # 샘플 수
         return len(self.label)
 
+@app.route('/textcls/<text>', methods=['POST'])
+def textcls(text):
+    try:
+        url_encoded = url_encode(text)
+        preprocessed = preprocess(url_encoded, True)
+        input_text = preprocessed.replace('윪', '[URL]')
 
+        test_tok = klue_Dataset(tokenizer(input_text, return_tensors="pt",
+                                          max_length=256,
+                                          padding=True,
+                                          truncation=True,
+                                          add_special_tokens=True), [1])
+
+        test_dataloader = DataLoader(test_tok, batch_size=128, shuffle=False)
+
+    except Exception as e:
+        return {'error': str(e)}
 
 if __name__ == '__main__':
     app.run(debug=True)
