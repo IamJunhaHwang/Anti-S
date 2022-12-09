@@ -7,18 +7,15 @@ import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MyReceiver : BroadcastReceiver() {
 
+    private val fm = SimpleDateFormat("yyyy-MM-dd HH:mm")
+
     private val TAG = "SMSReceiver"
-
-    var sender = ""
-    var content = ""
-    var date = ""
-
-
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called")
 
@@ -27,17 +24,31 @@ class MyReceiver : BroadcastReceiver() {
             val messages = parseSmsMessage(bundle!!)
 
             if(messages?.size!! > 0){
-                content = messages[0]?.messageBody.toString()
-                date = Date(messages[0]!!.timestampMillis).toString()
-                sender = messages[0]?.displayOriginatingAddress.toString()
+                val content = messages[0]?.messageBody.toString()
+                val date = Date(messages[0]!!.timestampMillis)
+                val sender = messages[0]?.displayOriginatingAddress.toString()
 
                 Log.d("문자 내용", content)
                 Log.d("송신자 번호", sender)
-                Log.d("수신 시간", date)
+                Log.d("수신 시간", date.toString())
 
-
+                sendToActivity(context, sender, content, date)
             }
         }
+    }
+
+    private fun sendToActivity(
+        context: Context,
+        sender: String,
+        contents: String,
+        receivedDate: Date
+    ) {
+        val intent = Intent(context, Fragment3::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("sender", sender)
+        intent.putExtra("contents", contents)
+        intent.putExtra("receivedDate", fm.format(receivedDate))
+        context.startActivity(intent)
     }
 
     private fun parseSmsMessage(bundle: Bundle): Array<SmsMessage?>? {
