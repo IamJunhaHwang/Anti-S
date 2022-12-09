@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: TabPagerAdapter
     private lateinit var fragment1: Fragment1
     private lateinit var fragment2: Fragment2
-    private lateinit var fragment3: Fragment3
+    val fragment3 = Fragment3()
     private lateinit var fragment4: Fragment4
     lateinit var binding: ActivityMainBinding
 
@@ -59,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         intent = getIntent()
         processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
 
-
-
     }
 
     private fun requirePerms() {
@@ -89,10 +87,6 @@ class MainActivity : AppCompatActivity() {
         val sender = intent?.getStringExtra("sender").toString()
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
-
-        Log.d("문자 내용", contents)
-        Log.d("송신자 번호", sender)
-        Log.d("수신 시간", receivedDate)
 
         val bundle = Bundle()
         bundle.putString("sender", sender)

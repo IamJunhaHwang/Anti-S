@@ -30,10 +30,6 @@ class MyReceiver : BroadcastReceiver() {
                 val date = Date(messages[0]!!.timestampMillis)
                 val sender = messages[0]?.displayOriginatingAddress.toString()
 
-                Log.d("문자 내용 1", content)
-                Log.d("송신자 번호 1", sender)
-                Log.d("수신 시간 1", date.toString())
-
                 sendToActivity(context, sender, content, date)
             }
         }
