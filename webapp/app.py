@@ -86,6 +86,22 @@ def textcls(text):
 
         test_dataloader = DataLoader(test_tok, batch_size=128, shuffle=False)
 
+        model.eval()
+        for i, data in enumerate(test_dataloader):
+            with torch.no_grad():
+                outputs = model(
+                    input_ids=data['input_ids'].to(device),
+                    attention_mask=data['attention_mask'].to(device),
+                    token_type_ids=data['token_type_ids'].to(device)
+                )
+            logits = outputs[0]
+            logits = logits.detach().cpu().numpy()
+            result = np.argmax(logits, axis=-1)
+
+        print(result)
+
+        return {'status': 'success','request':result}
+
     except Exception as e:
         return {'error': str(e)}
 
