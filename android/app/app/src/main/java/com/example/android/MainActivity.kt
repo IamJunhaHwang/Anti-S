@@ -62,11 +62,6 @@ class MainActivity : AppCompatActivity() {
         bundles.putString("message", message)
         val fragment3: Fragment3 = Fragment3()
         fragment3.arguments = bundles
-        val manager: FragmentManager = supportFragmentManager
-        val transaction: FragmentTransaction = manager.beginTransaction()
-        transaction.replace(R.id.mainactivity, fragment3).commit()
-
-
 
     }
 

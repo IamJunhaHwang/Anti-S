@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import java.util.*
 
 
@@ -45,11 +46,10 @@ class MyReceiver : BroadcastReceiver() {
                 Log.d("송신자 번호", sender)
                 Log.d("수신 시간", date)
 
-                val bundles: Bundle = Bundle()
                 val message: String = content
-                bundles.putString("message", message)
-                val mainFragment3: Fragment3 = Fragment3()
-                mainFragment3.arguments = bundles
+                bundle.putString("message", message)
+                val fragment3: Fragment3 = Fragment3()
+                fragment3.arguments = bundle
 
                 Log.d("문자 내용 main", message)
 
