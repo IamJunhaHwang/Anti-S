@@ -2,6 +2,7 @@ package com.example.android
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +17,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_1.*
-import com.example.android.Fragment3
+import kotlinx.android.synthetic.main.fragment_3.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -75,6 +76,16 @@ class MainActivity : AppCompatActivity() {
             Log.d("앱 종료 버튼", "앱이 종료되었음")
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    fun processedIntent: List<String>(intent: Intent?) {
+        val sender = intent?.getStringExtra("sender")
+        val contents = intent?.getStringExtra("contents")
+        val receivedDate = intent?.getStringExtra("receivedDate")
+
+        val sms: List<String> = listOf(sender.toString(), contents.toString(), receivedDate.toString())
+
+        return sms
     }
 
     /*override fun onDestroy() {

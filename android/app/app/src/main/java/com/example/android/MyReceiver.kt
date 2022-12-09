@@ -45,16 +45,17 @@ class MyReceiver : BroadcastReceiver() {
         contents: String,
         receivedDate: Date
     ) {
-        val intent = Intent(context, Fragment3::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("sender", sender)
         intent.putExtra("contents", contents)
         intent.putExtra("receivedDate", fm.format(receivedDate))
-        Log.d("전체 내용", intent.toString())
         Log.d("문자 내용", intent.getStringExtra("sender").toString())
         Log.d("송신자 번호", intent.getStringExtra("contents").toString())
         Log.d("수신 시간", intent.getStringExtra("receivedDate").toString())
-        context.startActivity(intent)
+        context?.let {
+            it.startActivity(intent)
+        }
     }
 
     private fun parseSmsMessage(bundle: Bundle): Array<SmsMessage?>? {
