@@ -17,15 +17,8 @@ class Fragment3 : Fragment() {
         val view = inflater.inflate(R.layout.fragment_3, container, false)
         val textmessage: TextView = view.findViewById(R.id.message_text)
         val message: String? = this.arguments?.getString("message")
+        Log.d("문자 내용1", message.toString())
         textmessage.text = message
-
-        val date = MyReceiver().getDate()
-        val content = MyReceiver().getContent()
-        val sender = MyReceiver().getSender()
-
-        Log.d("문자 내용1", content)
-        Log.d("송신자 번호1", sender)
-        Log.d("수신 시간1", date)
 
         return view
     }
