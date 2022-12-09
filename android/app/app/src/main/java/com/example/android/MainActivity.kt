@@ -59,7 +59,20 @@ open class MainActivity : AppCompatActivity() {
         Log.d("권한 요청", "권한 요청 진행함")
 
         intent = getIntent()
-        processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
+
+        val sender = intent?.getStringExtra("sender").toString()
+        val contents = intent?.getStringExtra("contents").toString()
+        val receivedDate = intent?.getStringExtra("receivedDate").toString()
+
+        val bundle = Bundle()
+        bundle.putString("sender", sender)
+        bundle.putString("contents", contents)
+        bundle.putString("receivedDate", receivedDate)
+
+        fragment3.arguments = bundle
+        if(bundle != null) {
+            processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
+        }
 
     }
 
@@ -95,17 +108,8 @@ open class MainActivity : AppCompatActivity() {
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
 
-        val bundle = Bundle()
-        bundle.putString("sender", sender)
-        bundle.putString("contents", contents)
-        bundle.putString("receivedDate", receivedDate)
+        fragment3.changeTextView(sender, contents, receivedDate)
 
-        val sms: List<String> = listOf(sender, contents, receivedDate)
-
-        fragment3.arguments = bundle
-        if (sms?.size!! > 0) {
-            fragment3.changeTextView(sender, contents, receivedDate)
-        }
     }
 
 
