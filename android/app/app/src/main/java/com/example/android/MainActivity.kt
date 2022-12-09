@@ -55,7 +55,11 @@ class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
-
+        val bundles: Bundle = Bundle()
+        val message: String = "황황황준준준하하하"
+        bundles.putString("message", message)
+        val mainFragment3: Fragment3 = Fragment3()
+        mainFragment3.arguments = bundles
 
 
 
