@@ -40,7 +40,11 @@ TBD
   
 ### 라이선스 
 
-TBD
+This project following Apache 2.0 License as written in LICENSE file
+
+Copyright 2022 JunHa-Hwang & SeungDong-Lee, and klue contributors
+
+Copyright (c) 2021 KLUE-baseline : [KLUE-baseline](https://github.com/KLUE-benchmark/KLUE-baseline)
 
 ### Author
 
