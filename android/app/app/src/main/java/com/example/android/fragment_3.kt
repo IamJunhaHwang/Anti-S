@@ -11,14 +11,14 @@ import kotlinx.android.synthetic.main.fragment_3.*
 
 
 class Fragment3 : Fragment() {
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_1, container, false)
 
-        val passedIntent = requireActivity().intent
+        val passedIntent = requireActivity().getIntent()
         processCommand(passedIntent)
 
         return view
