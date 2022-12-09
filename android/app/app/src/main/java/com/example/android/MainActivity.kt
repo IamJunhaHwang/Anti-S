@@ -55,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
+        val date = MyReceiver().date
+        val content = MyReceiver().content
+        val sender = MyReceiver().sender
+
+        Log.d("문자 내용", content)
+        Log.d("송신자 번호", sender)
+        Log.d("수신 시간", date)
+
     }
 
     private fun requirePerms() {

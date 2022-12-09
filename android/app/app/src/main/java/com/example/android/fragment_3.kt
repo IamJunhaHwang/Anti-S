@@ -15,9 +15,7 @@ class Fragment3 : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_3, container, false)
 
-        val editText: TextView = view.findViewById(R.id.sendNum);
-        val editText2: TextView = view.findViewById(R.id.content);
-        val editText3: TextView = view.findViewById(R.id.time);
+
 
         return view
     }
