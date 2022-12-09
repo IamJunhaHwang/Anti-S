@@ -30,7 +30,7 @@ class MyReceiver : BroadcastReceiver() {
                 val date = Date(messages[0]!!.timestampMillis)
                 val sender = messages[0]?.displayOriginatingAddress.toString()
 
-                sendToActivity(context, sender, content, date, true)
+                sendToActivity(context, sender, content, date)
             }
         }
     }
@@ -40,14 +40,12 @@ class MyReceiver : BroadcastReceiver() {
         sender: String,
         contents: String,
         receivedDate: Date,
-        receiveCheck: Boolean
     ) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("sender", sender)
         intent.putExtra("contents", contents)
         intent.putExtra("receivedDate", fm.format(receivedDate))
-        intent.putExtra("receiveCheck", receiveCheck)
         context?.let {
             it.startActivity(intent)
         }
