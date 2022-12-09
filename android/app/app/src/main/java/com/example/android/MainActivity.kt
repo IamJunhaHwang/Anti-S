@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
+import com.example.android.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragment2: Fragment2
     private lateinit var fragment3: Fragment3
     private lateinit var fragment4: Fragment4
+    lateinit var binding: ActivityMainBinding
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -56,6 +58,12 @@ class MainActivity : AppCompatActivity() {
 
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
+
+        val bundle = Bundle()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        bundle.putString("key", "heelllooo")
+        fragment3.arguments = bundle
 
     }
 

@@ -7,9 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import kotlinx.coroutines.NonCancellable.message
 import java.util.*
 
 
@@ -17,19 +14,10 @@ class MyReceiver : BroadcastReceiver() {
 
     private val TAG = "SMSReceiver"
 
-    private var sender = ""
-    private var content = ""
-    private var date = ""
+    var sender = ""
+    var content = ""
+    var date = ""
 
-    fun getSender(): String {
-        return sender
-    }
-    fun getContent(): String {
-        return content
-    }
-    fun getDate(): String {
-        return date
-    }
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called")
