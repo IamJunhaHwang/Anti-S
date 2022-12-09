@@ -71,39 +71,41 @@ class klue_Dataset(torch.utils.data.Dataset):
     def __len__(self):  # 샘플 수
         return len(self.label)
 
-@app.route('/textcls/<text>', methods=['POST'])
-def textcls(text):
-    try:
-        url_encoded = url_encode(text)
-        preprocessed = preprocess(url_encoded, True)
-        input_text = preprocessed.replace('윪', '[URL]')
+@app.route('/textcls', methods=['POST'])
+def textcls():
+    if request.method == 'POST':
+        try:
+            text = request.files['text']
+            url_encoded = url_encode(text)
+            preprocessed = preprocess(url_encoded, True)
+            input_text = preprocessed.replace('윪', '[URL]')
 
-        test_tok = klue_Dataset(tokenizer(input_text, return_tensors="pt",
-                                          max_length=256,
-                                          padding=True,
-                                          truncation=True,
-                                          add_special_tokens=True), [1])
+            test_tok = klue_Dataset(tokenizer(input_text, return_tensors="pt",
+                                              max_length=256,
+                                              padding=True,
+                                              truncation=True,
+                                              add_special_tokens=True), [1])
 
-        test_dataloader = DataLoader(test_tok, batch_size=128, shuffle=False)
+            test_dataloader = DataLoader(test_tok, batch_size=128, shuffle=False)
 
-        model.eval()
-        for i, data in enumerate(test_dataloader):
-            with torch.no_grad():
-                outputs = model(
-                    input_ids=data['input_ids'].to(device),
-                    attention_mask=data['attention_mask'].to(device),
-                    token_type_ids=data['token_type_ids'].to(device)
-                )
-            logits = outputs[0]
-            logits = logits.detach().cpu().numpy()
-            result = np.argmax(logits, axis=-1)
+            model.eval()
+            for i, data in enumerate(test_dataloader):
+                with torch.no_grad():
+                    outputs = model(
+                        input_ids=data['input_ids'].to(device),
+                        attention_mask=data['attention_mask'].to(device),
+                        token_type_ids=data['token_type_ids'].to(device)
+                    )
+                logits = outputs[0]
+                logits = logits.detach().cpu().numpy()
+                result = np.argmax(logits, axis=-1)
 
-        print(result)
+            print({"result": result})
 
-        return {'status': 'success','request':result}
+            return jsonify(result), 200
 
-    except Exception as e:
-        return {'error': str(e)}
+        except Exception as e:
+            return {'error': str(e)}
 
 if __name__ == '__main__':
     app.run(debug=True)
