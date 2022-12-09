@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
+import androidx.fragment.app.FragmentManager
 import java.util.*
 
 
@@ -14,9 +15,19 @@ class MyReceiver : BroadcastReceiver() {
 
     private val TAG = "SMSReceiver"
 
-    var sender = ""
-    var content = ""
-    var date = ""
+    private var sender = ""
+    private var content = ""
+    private var date = ""
+
+    fun getSender(): String {
+        return sender
+    }
+    fun getContent(): String {
+        return content
+    }
+    fun getDate(): String {
+        return date
+    }
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called")
@@ -33,6 +44,12 @@ class MyReceiver : BroadcastReceiver() {
                 Log.d("문자 내용", content)
                 Log.d("송신자 번호", sender)
                 Log.d("수신 시간", date)
+
+                val bundles: Bundle = Bundle()
+                val message: String = content
+                bundles.putString("message", message)
+                val mainFragment3: Fragment3 = Fragment3()
+                mainFragment3.arguments = bundles
 
             }
         }
