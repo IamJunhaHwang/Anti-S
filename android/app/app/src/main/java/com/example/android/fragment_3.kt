@@ -15,6 +15,16 @@ class Fragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_3, container, false)
+
+        return view
+    }
+
+    fun onResume(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) {
+        val view: View = inflater.inflate(R.layout.fragment_3, container, false)
+
         val textmessage: TextView = view.findViewById(R.id.message_text)
         val message: String? = this.arguments?.getString("message")
         Log.d("문자 내용1", message.toString())
