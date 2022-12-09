@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
+        intent = getIntent()
+        processedIntent(intent)
+
     }
 
     private fun requirePerms() {
@@ -78,14 +81,22 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun processedIntent: List<String>(intent: Intent?) {
+    fun processedIntent(intent: Intent?): List<String> {
         val sender = intent?.getStringExtra("sender")
         val contents = intent?.getStringExtra("contents")
         val receivedDate = intent?.getStringExtra("receivedDate")
 
-        val sms: List<String> = listOf(sender.toString(), contents.toString(), receivedDate.toString())
+        Log.d("문자 내용", contents.toString())
+        Log.d("송신자 번호", sender.toString())
+        Log.d("수신 시간", receivedDate.toString())
 
+        val sms: List<String> = listOf(sender.toString(), contents.toString(), receivedDate.toString())
         return sms
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        processedIntent(intent)
+        super.onNewIntent(intent)
     }
 
     /*override fun onDestroy() {
