@@ -8,8 +8,10 @@
 
 - `Preprocessing_Base.ipynb`: SMS 수신 시 해당 수신 메시지에 적용되는 전처리 과정을 보여주기 위한 노트북 파일입니다.
 
-- `Modeling_base.ipynb`: 스미싱 위험 감지 모델을 학습하는 Baseline 노트북 파일입니다.
+- `Modeling_base.ipynb`: 스미싱 위험 감지 모델을 학습하는 Tunib-electra Baseline 노트북 파일입니다.
 
 ### 라이선스 
 
-- [tunib-electra](https://github.com/tunib-ai/tunib-electra) : Apache License 2.0
+Copyright (c) 2021 TUNiB Inc : [tunib-electra](https://github.com/tunib-ai/tunib-electra), http://www.tunib.ai
+
+TUNiB-Electra is licensed under the terms of the Apache 2.0 License.
