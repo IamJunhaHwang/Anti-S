@@ -1,9 +1,9 @@
 package com.example.android
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
@@ -14,6 +14,7 @@ import java.util.*
 
 class MyReceiver : BroadcastReceiver() {
 
+    @SuppressLint("SimpleDateFormat")
     private val fm = SimpleDateFormat("yyyy-MM-dd HH:mm")
 
     private val TAG = "SMSReceiver"
@@ -29,9 +30,9 @@ class MyReceiver : BroadcastReceiver() {
                 val date = Date(messages[0]!!.timestampMillis)
                 val sender = messages[0]?.displayOriginatingAddress.toString()
 
-                Log.d("문자 내용", content)
-                Log.d("송신자 번호", sender)
-                Log.d("수신 시간", date.toString())
+                Log.d("문자 내용 1", content)
+                Log.d("송신자 번호 1", sender)
+                Log.d("수신 시간 1", date.toString())
 
                 sendToActivity(context, sender, content, date)
             }
@@ -50,9 +51,9 @@ class MyReceiver : BroadcastReceiver() {
         intent.putExtra("contents", contents)
         intent.putExtra("receivedDate", fm.format(receivedDate))
         Log.d("전체 내용", intent.toString())
-        Log.d("문자 내용", contents)
-        Log.d("송신자 번호", sender)
-        Log.d("수신 시간", fm.format(receivedDate))
+        Log.d("문자 내용", intent.getStringExtra("sender").toString())
+        Log.d("송신자 번호", intent.getStringExtra("contents").toString())
+        Log.d("수신 시간", intent.getStringExtra("receivedDate").toString())
         context.startActivity(intent)
     }
 
