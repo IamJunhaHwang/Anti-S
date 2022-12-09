@@ -51,6 +51,8 @@ class MyReceiver : BroadcastReceiver() {
                 val mainFragment3: Fragment3 = Fragment3()
                 mainFragment3.arguments = bundles
 
+                Log.d("문자 내용 main", message)
+
             }
         }
     }

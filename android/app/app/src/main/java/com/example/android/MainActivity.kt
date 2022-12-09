@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -58,8 +60,11 @@ class MainActivity : AppCompatActivity() {
         val bundles: Bundle = Bundle()
         val message: String = "황황황준준준하하하"
         bundles.putString("message", message)
-        val mainFragment3: Fragment3 = Fragment3()
-        mainFragment3.arguments = bundles
+        val fragment3: Fragment3 = Fragment3()
+        fragment3.arguments = bundles
+        val manager: FragmentManager = supportFragmentManager
+        val transaction: FragmentTransaction = manager.beginTransaction()
+        transaction.replace(R.id.mainactivity, fragment3).commit()
 
 
 
