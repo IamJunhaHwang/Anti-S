@@ -50,9 +50,6 @@ class MyReceiver : BroadcastReceiver() {
         intent.putExtra("sender", sender)
         intent.putExtra("contents", contents)
         intent.putExtra("receivedDate", fm.format(receivedDate))
-        Log.d("문자 내용", intent.getStringExtra("sender").toString())
-        Log.d("송신자 번호", intent.getStringExtra("contents").toString())
-        Log.d("수신 시간", intent.getStringExtra("receivedDate").toString())
         context?.let {
             it.startActivity(intent)
         }
