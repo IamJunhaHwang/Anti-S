@@ -7,25 +7,25 @@
     android:orientation="vertical"
     tools:context=".Fragment3">
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/sender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="발신번호"
+        android:text="발신번호"
         />
 
-    <EditText
-        android:id="@+id/editText3"
+    <TextView
+        android:id="@+id/contents"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:hint="내용"
+        android:text="내용"
         />
 
-    <EditText
-        android:id="@+id/editText2"
+    <TextView
+        android:id="@+id/receivedDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="수신시각" />
+        android:text="수신시각" />
 
 </LinearLayout>

@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun processedIntent(intent: Intent?): List<String> {
+    fun processedIntent(intent: Intent?) {
         val sender = intent?.getStringExtra("sender").toString()
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("receivedDate", receivedDate)
 
         fragment3.arguments = bundle
-        fragment3.changeTextView(sender, contents., receivedDate)
+        fragment3.changeTextView(sender, contents, receivedDate)
     }
 
     override fun onNewIntent(intent: Intent?) {

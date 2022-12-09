@@ -19,17 +19,17 @@ class Fragment3 : Fragment() {
     ): View? {
         _binding = Fragment3Binding.inflate(inflater, container, false)
 
-        binding.editText = arguments?.getString("receivedDate")
-        binding.editText2 = arguments?.getString("contents")
-        binding.editText3 = arguments?.getString("sender")
+        binding.sender.text = arguments?.getString("sender")
+        binding.receivedDate.text = arguments?.getString("receivedDate")
+        binding.contents.text = arguments?.getString("contents")
 
         return binding.root
     }
 
     fun changeTextView(receivedDate: String, contents: String, sender: String){
-        binding.editText = receivedDate
-        binding.editText2 = contents
-        binding.editText3 = sender
+        binding.sender.text = sender
+        binding.receivedDate.text = receivedDate
+        binding.contents.text = contents
     }
 
 }
