@@ -18,16 +18,18 @@ class Fragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = Fragment3Binding.inflate(inflater, container, false)
-        binding.editText.text = arguments?.getString("receivedDate")
-        binding.editText2.text = arguments?.getString("contents")
-        binding.editText3.text = arguments?.getString("sender")
+
+        binding.editText = arguments?.getString("receivedDate")
+        binding.editText2 = arguments?.getString("contents")
+        binding.editText3 = arguments?.getString("sender")
+
         return binding.root
     }
 
     fun changeTextView(receivedDate: String, contents: String, sender: String){
-        binding.editText.text = receivedDate
-        binding.editText2.text = contents
-        binding.editText3.text = sender
+        binding.editText = receivedDate
+        binding.editText2 = contents
+        binding.editText3 = sender
     }
 
 }
