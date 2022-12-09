@@ -59,10 +59,10 @@ open class MainActivity : AppCompatActivity() {
         Log.d("권한 요청", "권한 요청 진행함")
 
         intent = getIntent()
-
         val sender = intent?.getStringExtra("sender").toString()
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
+        val receiveCheck = intent?.getBooleanExtra("receiveCheck", false)
 
         val bundle = Bundle()
         bundle.putString("sender", sender)
@@ -70,7 +70,7 @@ open class MainActivity : AppCompatActivity() {
         bundle.putString("receivedDate", receivedDate)
 
         fragment3.arguments = bundle
-        if(bundle != null) {
+        if(receiveCheck == true) {
             processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
         }
 
