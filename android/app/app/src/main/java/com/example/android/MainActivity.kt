@@ -2,6 +2,8 @@ package com.example.android
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_1.*
 import kotlinx.android.synthetic.main.fragment_3.*
 
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
@@ -61,6 +63,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        processedIntent(intent)
+    }
+
     private fun requirePerms() {
         val permissions = arrayOf<String>(Manifest.permission.RECEIVE_SMS)
         val permissionCheck =
@@ -93,14 +100,14 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("contents", contents)
         bundle.putString("receivedDate", receivedDate)
 
+        val sms: List<String> = listOf(sender, contents, receivedDate)
+
         fragment3.arguments = bundle
-        fragment3.changeTextView(sender, contents, receivedDate)
+        if (sms?.size!! > 0) {
+            fragment3.changeTextView(sender, contents, receivedDate)
+        }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        processedIntent(intent)
-        super.onNewIntent(intent)
-    }
 
     /*override fun onDestroy() {
         super.onDestroy()
