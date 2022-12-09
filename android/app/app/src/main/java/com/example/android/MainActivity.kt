@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.android.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fragment2: Fragment2
     private lateinit var fragment3: Fragment3
     private lateinit var fragment4: Fragment4
+    lateinit var binding: ActivityMainBinding
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -55,7 +57,9 @@ class MainActivity : AppCompatActivity() {
         Log.d("권한 요청", "권한 요청 진행함")
 
         intent = getIntent()
-        processedIntent(intent)
+        processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
+
+
 
     }
 
@@ -82,16 +86,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun processedIntent(intent: Intent?): List<String> {
-        val sender = intent?.getStringExtra("sender")
-        val contents = intent?.getStringExtra("contents")
-        val receivedDate = intent?.getStringExtra("receivedDate")
+        val sender = intent?.getStringExtra("sender").toString()
+        val contents = intent?.getStringExtra("contents").toString()
+        val receivedDate = intent?.getStringExtra("receivedDate").toString()
 
-        Log.d("문자 내용", contents.toString())
-        Log.d("송신자 번호", sender.toString())
-        Log.d("수신 시간", receivedDate.toString())
+        Log.d("문자 내용", contents)
+        Log.d("송신자 번호", sender)
+        Log.d("수신 시간", receivedDate)
 
-        val sms: List<String> = listOf(sender.toString(), contents.toString(), receivedDate.toString())
-        return sms
+        val bundle = Bundle()
+        bundle.putString("sender", sender)
+        bundle.putString("contents", contents)
+        bundle.putString("receivedDate", receivedDate)
+
+        fragment3.arguments = bundle
+        fragment3.changeTextView(sender, contents., receivedDate)
     }
 
     override fun onNewIntent(intent: Intent?) {
