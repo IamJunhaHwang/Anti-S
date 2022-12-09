@@ -63,22 +63,15 @@ open class MainActivity : AppCompatActivity() {
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
         val receiveCheck = intent?.getBooleanExtra("receiveCheck", false)
+        Log.d("sms", sender)
+        Log.d("sms", contents)
+        Log.d("sms", receivedDate)
 
-        val bundle = Bundle()
-        bundle.putString("sender", sender)
-        bundle.putString("contents", contents)
-        bundle.putString("receivedDate", receivedDate)
-
-        fragment3.arguments = bundle
         if(receiveCheck == true) {
+            Log.d("checkpoint", "프래그먼트3으로 정보 전달하기")
             processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
         }
 
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        processedIntent(intent)
     }
 
     private fun requirePerms() {
