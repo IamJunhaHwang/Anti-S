@@ -55,6 +55,21 @@ def url_encode(text: str):
         return text.replace(url_txt, " 윪 ")
 
 
+class klue_Dataset(torch.utils.data.Dataset):
+    def __init__(self, dataset, label):  # 전처리된 데이터 셋이 들어옴
+        self.dataset = dataset
+        self.label = label
+
+    def __getitem__(self, idx):
+        # gradient 계산에 영향을 주지 않게 clone().detach() 실행
+
+        item = {key: val[idx].clone().detach() for key, val in self.dataset.items()}
+        item['label'] = torch.tensor(self.label[idx])
+
+        return item
+
+    def __len__(self):  # 샘플 수
+        return len(self.label)
 
 
 
