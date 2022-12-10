@@ -10,10 +10,13 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -115,6 +118,20 @@ open class MainActivity : AppCompatActivity() {
             notificationHelper.getChannelNotification(title, message)
 
         notificationHelper.getManager().notify(1, nb.build())
+    }
+
+    fun onClick(v: View) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        when (v.id) {
+            R.id.btnsmisihinginfo -> {
+                intent.data = Uri.parse("https://spam.kisa.or.kr/spam/na/ntt/selectNttList.do?mi=1019&bbsId=1001")
+                startActivity(intent)
+            }
+            R.id.btnsmisihingreport -> {
+                intent.data = Uri.parse("https://www.krcert.or.kr/consult/phishing.do")
+                startActivity(intent)
+            }
+        }
     }
 
     /*override fun onDestroy() {
