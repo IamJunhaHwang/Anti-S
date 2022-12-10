@@ -14,6 +14,7 @@ class Fragment3 : Fragment() {
     var sender: String = ""
     var contents: String = ""
     var receivedDate: String = ""
+    var answer: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +29,12 @@ class Fragment3 : Fragment() {
     }
 
     fun changeTextView(){
+        this.answer = MyApplication.prefs.getString("result", "-")
         this.sender = MyApplication.prefs.getString("sender", "-")
         this.contents =MyApplication.prefs.getString("contents", "-")
         this.receivedDate =MyApplication.prefs.getString("receivedDate", "-")
 
+        Log.d("frag3", answer)
         Log.d("frag3", sender)
         Log.d("frag3", contents)
         Log.d("frag3", receivedDate)

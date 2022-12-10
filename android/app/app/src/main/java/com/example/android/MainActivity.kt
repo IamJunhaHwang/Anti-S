@@ -8,8 +8,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
@@ -18,15 +16,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.Response
@@ -115,30 +110,31 @@ open class MainActivity : AppCompatActivity() {
         jsonObject.put("msg", sms)
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.POST,
-            "http://ip/textcls",
+            "http://ip:10025/textcls",
             jsonObject,
             Response.Listener<JSONObject> { response ->   //JSON을 파싱한 JSONObject 객체 전달
                 answer = response.getString("result")
 
                 Log.d("Smishing?", answer)
+
+                notificationHelper = NotificationHelper(this)
+                val title: String = answer
+                val message: String = contents
+                showNotification(title, message)
+
+                MyApplication.prefs.setString("result", answer)
+                MyApplication.prefs.setString("sender", sender)
+                MyApplication.prefs.setString("contents", contents)
+                MyApplication.prefs.setString("receivedDate", receivedDate)
+                fragment3.changeTextView()
+
             },
             Response.ErrorListener { error -> Log.d("kkang============", "error......$error") }
         )
-
         val queue = Volley.newRequestQueue(this)
         queue.add(jsonObjectRequest)
 
-        notificationHelper = NotificationHelper(this)
-        val title: String = answer
-        val message: String = contents
-        showNotification(title, message)
 
-        MyApplication.prefs.setString("result", answer)
-        MyApplication.prefs.setString("sender", sender)
-        MyApplication.prefs.setString("contents", contents)
-        MyApplication.prefs.setString("receivedDate", receivedDate)
-
-        fragment3.changeTextView()
     }
     override fun onNewIntent(intent: Intent?) {
         processedIntent(intent)
