@@ -75,7 +75,8 @@ class klue_Dataset(torch.utils.data.Dataset):
 def textcls():
     if request.method == 'POST':
         try:
-            text = request.form['text']
+            jsonf = request.get_json()
+            text = jsonf["msg"]
             print(text, type(text))
             url_encoded = url_encode(text)
             preprocessed = preprocess(url_encoded, True)
@@ -101,13 +102,16 @@ def textcls():
                 logits = logits.detach().cpu().numpy()
                 result = np.argmax(logits, axis=-1)
                 answer = result.tolist()
+                answer = answer[-1]
+                answer = str(answer)
 
-            print({"result": answer})
+            rponse = {"result": answer}
+            print(rponse)
 
-            return jsonify(answer), 200
+            return jsonify(rponse), 200
 
         except Exception as e:
             return {'error': str(e)}
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10025,debug=True)
