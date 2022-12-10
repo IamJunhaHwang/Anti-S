@@ -12,10 +12,12 @@
 
 ### 의존성
 
-- python 3.x
+- python 3.8.x
+  - python library 설치는 위의 설치 방법을 따라하시면 됩니다.
+  
 - Andriod & API Level
   - Andriod version: `Andriod 11.0`
-  - min sdk: `16`
+  - min sdk: `19`
   - target sdk:`32`
 
 ### 사용 방법
