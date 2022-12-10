@@ -99,9 +99,6 @@ open class MainActivity : AppCompatActivity() {
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
 
-        Log.d("sms", sender)
-        Log.d("sms", contents)
-        Log.d("sms", receivedDate)
         //fragment3.changeTextView(sender, contents, receivedDate)
 
         notificationHelper = NotificationHelper(this)
