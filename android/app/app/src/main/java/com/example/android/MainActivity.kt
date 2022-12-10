@@ -2,17 +2,25 @@ package com.example.android
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.icu.text.CaseMap.Title
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.android.databinding.ActivityMainBinding
@@ -33,6 +41,7 @@ open class MainActivity : AppCompatActivity() {
     val fragment3 = Fragment3()
     private lateinit var fragment4: Fragment4
     lateinit var binding: ActivityMainBinding
+    private lateinit var notificationHelper: NotificationHelper
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -59,10 +68,6 @@ open class MainActivity : AppCompatActivity() {
         Log.d("권한 요청", "권한 요청 진행함")
 
         intent = getIntent()
-        val sender = intent?.getStringExtra("sender").toString()
-        val contents = intent?.getStringExtra("contents").toString()
-        val receivedDate = intent?.getStringExtra("receivedDate").toString()
-
         processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
 
     }
@@ -97,15 +102,67 @@ open class MainActivity : AppCompatActivity() {
         Log.d("sms", sender)
         Log.d("sms", contents)
         Log.d("sms", receivedDate)
-
         //fragment3.changeTextView(sender, contents, receivedDate)
 
+        notificationHelper = NotificationHelper(this)
+        val title: String = sender
+        val message: String = contents
+        showNotification(title, message)
+
+    }
+    override fun onNewIntent(intent: Intent?) {
+        processedIntent(intent)
+        super.onNewIntent(intent)
     }
 
+    private fun showNotification(title: String, message: String){
+        val nb: NotificationCompat.Builder =
+            notificationHelper.getChannelNotification(title, message)
+
+        notificationHelper.getManager().notify(1, nb.build())
+    }
 
     /*override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(myReceiver)
         Log.d("onDestory()", "브로드캐스트리시버 해제됨")
     }*/
+}
+
+class NotificationHelper(base: Context?) : ContextWrapper(base) {
+    private val channelID: String = "channelID"
+    private val channelNm: String = "channelName"
+
+    init{
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            createChannel()
+        }
+    }
+
+    private fun createChannel(){
+        val channel: NotificationChannel =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel(channelID, channelNm, NotificationManager.IMPORTANCE_DEFAULT)
+            } else {
+                TODO("VERSION.SDK_INT < O")
+            }
+
+        channel.enableLights(true)
+        channel.enableVibration(true)
+        channel.lightColor = Color.RED
+        channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
+
+        getManager().createNotificationChannel(channel)
+    }
+
+    fun getManager():NotificationManager{
+        return getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    }
+
+    fun getChannelNotification(title: String, message: String): NotificationCompat.Builder{
+        return NotificationCompat.Builder(applicationContext, channelID)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+    }
 }

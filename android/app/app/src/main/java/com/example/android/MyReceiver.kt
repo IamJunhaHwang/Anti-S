@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,14 +32,6 @@ class MyReceiver : BroadcastReceiver() {
 
                 sendToActivity(context, sender, content, date)
 
-                val CHANNEL_ID = "테스트 "
-                val CHANNEL_NAME = "알림채널 이름"
-                val CHANNEL_DESCRITION = "알림채널 설명"
-
-                val inboxStyle =NotificationCompat.InboxStyle().addLine("첫번째")
-                    .addLine("두번째").addLine("두번째").addLine("두번째")
-
-                var builder = NotificationCompat.Builder(this, CHANNEL_ID).setStyle(inboxStyle)
             }
         }
     }
@@ -74,5 +65,6 @@ class MyReceiver : BroadcastReceiver() {
         }
         return messages
     }
+
 
 }
