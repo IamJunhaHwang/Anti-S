@@ -105,7 +105,7 @@ def textcls():
                 answer = answer[-1]
                 answer = str(answer)
 
-                if answer == 1:
+                if answer == "1":
                     answer = "스미싱 위험이 감지되었습니다!"
                 else:
                     answer = "해당 메시지는 안전하군요:)"
