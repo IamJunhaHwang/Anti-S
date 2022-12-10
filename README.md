@@ -3,7 +3,15 @@
 ### 설치 방법
 
 - 어플 설치 방법
-  - TBD
+  - [Anti-S/android/app/app/release](https://github.com/IamJunhaHwang/Anti-S/tree/main/android/app/app/release) 경로의 `app-release.apk` 파일을 다운로드한 후에 안드로이드에 설치하면 됩니다.
+  
+  - 파일 다운로드는 아래와 같이 가능합니다.
+    ```bash
+    git clone https://github.com/IamJunhaHwang/Anti-S.git
+    cd Anti-S/android/app/app/release
+    ```
+    
+  - `.aab`파일로 설치를 하기 위해서는 추가 절차가 필요합니다. [Android Developer 공식 문서](https://developer.android.com/studio/command-line/bundletool?hl=ko)를 참고해주세요.
 
 - 파이썬 라이브러리 설치 방법
   ```bash
