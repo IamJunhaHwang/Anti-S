@@ -69,7 +69,25 @@ SMS를 수신하면 해당 메시지를 웹 서버에 전송하고 딥러닝 언
   - 데이터 출처: 인피니그루
 
   - 데이터명: 스팸 문자
+  
+-------  
 
+### 사용 모델
+
+- 스미싱 위험 여부 예측을 위해 `klue-RoBERTa-small`모델을 사용하였습니다. 해당 모델은 [huggingface-hub](https://huggingface.co/klue/roberta-small)에 공개되어 있습니다.
+
+- 모델은 Pretrain된 `klue-RoBERTa-small` 위에 2개의 Label을 가지는 `Linear Layer` 하나를 쌓은 구조입니다.
+
+- 모델의 Pretrain에 관한 사항은 KLUE의 [공식 Paper](https://arxiv.org/pdf/2105.09680.pdf)를 참고해주세요.
+
+- Fine-Tuning에 대한 Training Argument및 Train 방법은 본 레포지토리의 [model 폴더의 노트북 파일](https://github.com/IamJunhaHwang/Anti-S/blob/main/model/klue-roberta-small.ipynb)을 참고해주세요.
+
+- 토크나이저의 경우 `klue-RoBERTa-small`의 Pretrain에 사용된 것을 사용하되 `SPECIAL_TOKEN`으로 `[URL]`라는 토큰을 추가하였습니다.
+  - 입력의 전처리 과정에서 `url`을 정규표현식으로 추출한 후 `[URL]`로 바꾸어주게 됩니다.
+  - 해당 토큰으로 인해 모델은 `url`이 등장했는지 안했는지를 추론의 근거로 사용할 수 있게 됩니다.
+
+
+---------
 
 ### 사용 예시
 
