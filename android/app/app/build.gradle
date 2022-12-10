@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.android"
+        applicationId "com.antis.android"
         minSdk 19
         targetSdk 32
         versionCode 1

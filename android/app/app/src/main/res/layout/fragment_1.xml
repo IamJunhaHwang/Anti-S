@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="방해금지모드"
+        android:text="방해금지모드 ON"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
 
     <androidx.appcompat.widget.SwitchCompat

@@ -19,9 +19,11 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.Response
@@ -41,7 +43,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapter: TabPagerAdapter
-    private lateinit var fragment1: Fragment1
+    val fragment1 = Fragment1()
     private lateinit var fragment2: Fragment2
     val fragment3 = Fragment3()
     private lateinit var fragment4: Fragment4
@@ -73,8 +75,10 @@ open class MainActivity : AppCompatActivity() {
         requirePerms()
         Log.d("권한 요청", "권한 요청 진행함")
 
+
         intent = getIntent()
         processedIntent(intent) //MyReceiver에서 SMS 정보 받아오기
+
 
     }
 
@@ -203,6 +207,6 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return NotificationCompat.Builder(applicationContext, channelID)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.mipmap.ic_antis)
     }
 }
