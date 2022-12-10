@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    android:orientation="vertical"
+    tools:context=".Fragment1">
 
     <TextView
+        android:id="@+id/switchtext"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="this is on/off"
-        />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="방해금지모드"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/onoffswitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:switchMinWidth="60dp"
+        android:switchPadding="20dp"
+        android:text="ON/OFF"/>
 
 </LinearLayout>
