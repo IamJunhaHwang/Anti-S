@@ -20,9 +20,11 @@ SMS를 수신하면 해당 메시지를 웹 서버에 전송하고 딥러닝 언
   - `.aab`파일로 설치를 하기 위해서는 추가 절차가 필요합니다. [Android Developer 공식 문서](https://developer.android.com/studio/command-line/bundletool?hl=ko)를 참고해주세요.
 
 - 파이썬 라이브러리 설치 방법
-  ```bash
-  pip install -r requirements.txt
-  ```
+
+  - github를 `clone`한 후에 아래의 명령어를 사용하면 됩니다.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ---------
 
