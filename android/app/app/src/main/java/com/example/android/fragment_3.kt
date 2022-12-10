@@ -1,35 +1,32 @@
 package com.example.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.android.databinding.Fragment3Binding
 
 
 class Fragment3 : Fragment() {
-
-    private var _binding : Fragment3Binding? = null
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = Fragment3Binding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_3, container, false)
 
-        binding.sender.text = arguments?.getString("sender")
-        binding.receivedDate.text = arguments?.getString("receivedDate")
-        binding.contents.text = arguments?.getString("contents")
-
-        return binding.root
+        return view
     }
 
-    fun changeTextView(receivedDate: String, contents: String, sender: String){
-        binding.sender.text = sender
-        binding.receivedDate.text = receivedDate
-        binding.contents.text = contents
+    fun changeTextView(){
+        val sender: String = MyApplication.prefs.getString("sender", "-")
+        val contents: String =MyApplication.prefs.getString("contents", "-")
+        val receivedDate: String =MyApplication.prefs.getString("receivedDate", "-")
+
+        Log.d("frag3", sender)
+        Log.d("frag3", contents)
+        Log.d("frag3", receivedDate)
     }
 
 }

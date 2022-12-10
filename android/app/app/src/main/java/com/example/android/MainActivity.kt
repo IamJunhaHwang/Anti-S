@@ -8,6 +8,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
@@ -23,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.android.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
@@ -100,13 +104,16 @@ open class MainActivity : AppCompatActivity() {
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
 
-        //fragment3.changeTextView(sender, contents, receivedDate)
-
         notificationHelper = NotificationHelper(this)
         val title: String = sender
         val message: String = contents
         showNotification(title, message)
 
+        MyApplication.prefs.setString("sender", sender)
+        MyApplication.prefs.setString("contents", contents)
+        MyApplication.prefs.setString("receivedDate", receivedDate)
+
+        fragment3.changeTextView()
     }
     override fun onNewIntent(intent: Intent?) {
         processedIntent(intent)
