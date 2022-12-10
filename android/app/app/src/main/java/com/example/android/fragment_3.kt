@@ -11,22 +11,26 @@ import androidx.fragment.app.Fragment
 
 class Fragment3 : Fragment() {
 
+    var sender: String = ""
+    var contents: String = ""
+    var receivedDate: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_3, container, false)
 
-        var listview: ListView
-        var adapter: ListViewAdapter
+        //var listview: ListView
+        //var adapter: ListViewAdapter
 
         return view
     }
 
     fun changeTextView(){
-        val sender: String = MyApplication.prefs.getString("sender", "-")
-        val contents: String =MyApplication.prefs.getString("contents", "-")
-        val receivedDate: String =MyApplication.prefs.getString("receivedDate", "-")
+        this.sender = MyApplication.prefs.getString("sender", "-")
+        this.contents =MyApplication.prefs.getString("contents", "-")
+        this.receivedDate =MyApplication.prefs.getString("receivedDate", "-")
 
         Log.d("frag3", sender)
         Log.d("frag3", contents)

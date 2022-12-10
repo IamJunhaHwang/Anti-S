@@ -28,12 +28,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.viewpager2.widget.ViewPager2
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.android.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_1.*
 import kotlinx.android.synthetic.main.fragment_3.*
+import org.json.JSONObject
 
 
 open class MainActivity : AppCompatActivity() {
@@ -47,6 +52,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var fragment4: Fragment4
     lateinit var binding: ActivityMainBinding
     private lateinit var notificationHelper: NotificationHelper
+    val jsonObject = JSONObject()
 
     val str = arrayOf("on/off", "report/info", "log", "setting")
 
@@ -104,11 +110,30 @@ open class MainActivity : AppCompatActivity() {
         val contents = intent?.getStringExtra("contents").toString()
         val receivedDate = intent?.getStringExtra("receivedDate").toString()
 
+        val sms = contents
+        var answer: String = ""
+        jsonObject.put("msg", sms)
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.POST,
+            "http://ip/textcls",
+            jsonObject,
+            Response.Listener<JSONObject> { response ->   //JSON을 파싱한 JSONObject 객체 전달
+                answer = response.getString("result")
+
+                Log.d("Smishing?", answer)
+            },
+            Response.ErrorListener { error -> Log.d("kkang============", "error......$error") }
+        )
+
+        val queue = Volley.newRequestQueue(this)
+        queue.add(jsonObjectRequest)
+
         notificationHelper = NotificationHelper(this)
-        val title: String = sender
+        val title: String = answer
         val message: String = contents
         showNotification(title, message)
 
+        MyApplication.prefs.setString("result", answer)
         MyApplication.prefs.setString("sender", sender)
         MyApplication.prefs.setString("contents", contents)
         MyApplication.prefs.setString("receivedDate", receivedDate)
